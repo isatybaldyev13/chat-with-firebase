@@ -43,8 +43,7 @@ export const AuthState = ({ children }) => {
         email,
         password
       );
-      storeUser(response)
-      console.log(response);
+      storeUser(response?.user)
     } catch (error) {
       alert(error?.message);
     }
@@ -54,8 +53,7 @@ export const AuthState = ({ children }) => {
     try {
       const provider = new GoogleAuthProvider();
       let response = await signInWithPopup(auth, provider);
-      console.log(response);
-      storeUser(response)
+      storeUser(response?.user)
     } catch (error) {
       alert(error?.message);
     }
@@ -70,10 +68,12 @@ export const AuthState = ({ children }) => {
   };
 
   const storeUser = userData => {
-
-    //const key = push(child(ref(db), "users")).key;
-
-    //set(ref(db, `users/${key}`), { });
+    let data = {
+        displayName: userData?.displayName,
+        email: userData?.email,
+        photoURL: userData?.photoURL,  
+    }
+    set(ref(db, `users/${userData?.uid}`), data);
   }
 
   const info = useMemo(
