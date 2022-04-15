@@ -99,6 +99,7 @@ body {
   background-color: #fff;
   width: 100%;
   padding: 20px;
+  overflow: scroll;
 }
 .messages-footer{
   background-color: #e6eaed;
